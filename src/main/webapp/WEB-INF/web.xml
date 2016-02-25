@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-	<servlet>
-		<servlet-name>MyAPI</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>MyAPI</servlet-name>
+	<!--
+	- Location of the XML file that defines the root application context
+	- Applied by ContextLoaderListener.
+	-->
+	<!-- tag::context-param[] -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/spring/*.xml
+		</param-value>
+	</context-param>
+	<!-- end::context-param[] -->
+
+	<!-- tag::springSessionRepositoryFilter[] -->
+	<filter>
+		<filter-name>springSessionRepositoryFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSessionRepositoryFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</servlet-mapping>
+	</filter-mapping>
+	<!-- end::springSessionRepositoryFilter[] -->
+
+	<!--
+	- Loads the root application context of this web app at startup.
+	- The application context is then available via
+	- WebApplicationContextUtils.getWebApplicationContext(servletContext).
+	-->
+	<!-- tag::listeners[] -->
+	<listener>
+		<listener-class>
+			org.springframework.web.context.support.XmlWebApplicationContext
+		</listener-class>
+	</listener>
+	<!-- end::listeners[] -->
 </web-app>
