@@ -10,11 +10,14 @@
         http://www.springframework.org/schema/context/spring-context.xsd 
         http://www.springframework.org/schema/mvc 
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	
 	<mvc:annotation-driven/>
-	<context:component-scan base-package="com.jarmy.lab.spring.rest" />
-
 	<context:annotation-config/>
+	
+	<context:component-scan base-package="com.jarmy.lab.spring.rest" />
+	
 	<bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>
-
 	<bean class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"/>
+	<bean class="org.springframework.session.web.http.HeaderHttpSessionStrategy"/>
+	<bean class="com.jarmy.lab.spring.rest.Initializer"/>
 </beans>
