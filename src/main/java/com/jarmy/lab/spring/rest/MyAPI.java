@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/web", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class MyAPI {
 
-	@RequestMapping(value = "/test", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/test")
 	public MyUser hello() {
 		MyUser user = new MyUser();
 		user.setName("Abbas");
@@ -20,7 +20,7 @@ public class MyAPI {
 	@Autowired
 	private Calculator calc;
 
-	@RequestMapping(value = "/test2", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/test2")
 	public int hello2() {
 		return calc.getStatefulValue();
 	}
